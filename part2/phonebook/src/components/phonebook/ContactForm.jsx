@@ -15,9 +15,26 @@ export const ContactForm = ({ onContactAdded, existingContacts, setNotification 
       return;
     }
 
-    if (existingContacts.some(contact => contact.number === number)) {
-      setNotification("Number already exists");
+    const nameExists = existingContacts.find(contact => contact.name === name);
+    const numberExists = existingContacts.find(contact => contact.number === number);
+ 
+
+    if (nameExists || numberExists) {
+      const existingContact = nameExists || numberExists;
+      if (!window.confirm(`${nameExists ? 'Name' : 'Number'} already exists. Do you want to update the contact?`)) {
+        return;
+      } else {
+        try {
+          const updatedContact = await nameService.update(existingContact.id, { name, number });
+          onContactAdded(prevContacts => prevContacts.map(contact => contact.id === updatedContact.id ? updatedContact : contact));
+          setNotification(`Updated ${updatedContact.name}`);
+          setName("");
+          setNumber("");
+        } catch (error) {
+          setNotification(error.response.data.error);
+        }
       return;
+      }
     }
 
     try {
@@ -32,8 +49,9 @@ export const ContactForm = ({ onContactAdded, existingContacts, setNotification 
       setName("");
       setNumber("");
     } catch (error) {
-      setNotification("Error adding contact");
+      setNotification(error.response.data.error);
     }
+    return;
   };
 
   return (

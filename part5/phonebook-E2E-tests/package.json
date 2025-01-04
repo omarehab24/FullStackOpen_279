@@ -1,0 +1,20 @@
+{
+  "name": "phonebook-e2e-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test --project=chromium --trace on",
+    "test:report": "playwright show-report",
+    "test:ui": "playwright test --project=chromium --ui",
+    "test:debug": "playwright test blog.spec.js:96 --project=chromium --debug",
+    "test:codegen": "playwright codegen http://localhost:5173/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.3"
+  }
+}
