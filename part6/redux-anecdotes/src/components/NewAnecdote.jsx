@@ -13,9 +13,9 @@ const NewAnecdote = () => {
 
     return (
         <div>
-            <h2>create new</h2>
+            <h2>Create new anecdote</h2>
             <form onSubmit={newAnecdote}>
-                <input name="anecdote" />
+                <input name="anecdote" type='text' title='characters only' pattern='[A-Za-z]*'/>
                 <button type="submit">create</button>
             </form>
         </div>
