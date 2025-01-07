@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { createAnecdote } from '../reducers/anecdoteReducer'
+import notify from '../utils/notify'
 
 const NewAnecdote = () => {
     const dispatch = useDispatch()
@@ -9,6 +10,7 @@ const NewAnecdote = () => {
         const content = event.target.anecdote.value
         event.target.anecdote.value = ''
         dispatch(createAnecdote(content))
+        notify(dispatch, `you created a new anecdote: '${content}'`, 5)
     }
 
     return (
