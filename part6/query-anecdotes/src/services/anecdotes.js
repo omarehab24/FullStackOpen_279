@@ -4,8 +4,9 @@ const baseUrl = "http://localhost:3001/anecdotes";
 const getAll = () => axios.get(baseUrl).then((response) => response.data);
 
 const createAnecdote = async (content) => {
-    const response = await axios.post(baseUrl, content);
-    return response.data;
+        const response = await axios.post(baseUrl, content);
+        return response.data;
+
 };
 
 const updateAnecdote = async (updatedAnecdote) => {
